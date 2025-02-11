@@ -2,6 +2,12 @@
   "name": "restaurant-web",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
     "@loadable/component": "^5.16.4",
     "classnames": "^2.5.1",
