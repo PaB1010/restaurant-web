@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { buttonColors } from '../styles/colors'
 import sizes from '../styles/sizes'
-import type { CommonType } from '../types/styledType'
+import type { CommonType } from '../types/StyledType'
 
 const { dark } = buttonColors
 const { tiny, small, normal, medium, big, extra } = sizes
@@ -121,10 +121,6 @@ export const ButtonGroup = styled.div<CommonType>`
   display: flex;
   width: 100%;
 
-  &.center {
-    margin: 0 auto;
-  }
-
   button {
     width: 0;
     flex-grow: 1;
@@ -137,7 +133,7 @@ export const ButtonGroup = styled.div<CommonType>`
   ${({ width }) =>
     width &&
     css`
-      width: ${width}px;
+      width: ${width};
     `}
 
   ${({ color }) => changeColor(color)}

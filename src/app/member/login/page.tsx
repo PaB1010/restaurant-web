@@ -1,5 +1,4 @@
 import LoginContainer from '../containers/LoginContainer'
-
 import { MainContentBox } from '@/app/global/components/ContentBox'
 import { MainTitle } from '@/app/global/components/StyledTitle'
 

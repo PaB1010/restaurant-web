@@ -6,14 +6,20 @@ import styled from 'styled-components'
 import CommonContext from '../contexts/CommonContext'
 import sizes from '../styles/sizes'
 import colors from '../styles/colors'
-import type { CommonType } from '../types/styledType'
+import type { CommonType } from '../types/StyledType'
 
-const { medium, big } = sizes
+const { big } = sizes
 
 const { dark } = colors
 
 // children = 사이트 제목
-const _MainTitle = ({ children, className } : {children : string, className?: string}) => {
+const _MainTitle = ({
+  children,
+  className,
+}: {
+  children: string
+  className?: string
+}) => {
   const {
     actions: { setTitle },
   } = useContext(CommonContext)
@@ -33,9 +39,4 @@ export const MainTitle = styled(_MainTitle)<CommonType>`
   color: ${dark};
 `
 
-export const SubTitle = styled.h2`
-  padding: 0;
-  margin: 0 0 15px;
-  font-size: ${medium};
-  color: ${dark};
-`
+export default _MainTitle

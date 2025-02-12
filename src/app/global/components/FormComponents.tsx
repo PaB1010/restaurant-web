@@ -3,7 +3,7 @@
 import styled, { css } from 'styled-components'
 import colors from '../styles/colors'
 import sizes from '../styles/sizes'
-import type { CommonType } from '../types/styledType'
+import type { CommonType } from '../types/StyledType'
 
 const { light, dark } = colors
 

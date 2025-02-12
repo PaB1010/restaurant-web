@@ -19,7 +19,6 @@ const LoginForm = ({ actionState, onChange, form }) => {
         placeholder="이메일"
         color="dark"
       />
-
       <Messages color="danger">{errors?.email}</Messages>
 
       <Input
@@ -30,7 +29,6 @@ const LoginForm = ({ actionState, onChange, form }) => {
         placeholder="비밀번호"
         color="dark"
       />
-
       <Messages color="danger">{errors?.password}</Messages>
 
       <BigButton type="submit" disabled={isPending} color="primary">

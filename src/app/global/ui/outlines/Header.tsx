@@ -2,25 +2,20 @@
 
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { styled } from 'styled-components'
 import { RiLoginBoxLine, RiLogoutBoxLine } from 'react-icons/ri'
+import { MdContactPage } from 'react-icons/md'
 import { FaUserPlus, FaHome } from 'react-icons/fa'
-import classNames from 'classnames'
 import colors from '../../styles/colors'
 import sizes from '../../styles/sizes'
-import logo from '../../assets/images/logo2.png'
 import useUser from '../../hooks/useUser'
+import type { CommonType } from '../../types/StyledType'
 
-const { light } = colors
+const { light, dark } = colors
 const { big } = sizes
 
 // scss 문법
-const StyledHeader = styled.header`
-  &.line {
-    border-bottom: 1px solid ${light};
-  }
-
+const StyledHeader = styled.header<CommonType>`
   .site-top {
     background: ${light};
     height: 45px;
@@ -34,6 +29,10 @@ const StyledHeader = styled.header`
         align-items: center;
         height: 45px;
 
+        .icon-cls {
+          color: ${dark};
+        }
+
         a + a {
           margin-left: 10px;
         }
@@ -44,49 +43,44 @@ const StyledHeader = styled.header`
       }
     }
   }
-
-  .logo-search {
-    .layout-width {
-      display: flex;
-      justify-content: space-between;
-      height: 150px;
-      align-items: center;
-    }
-  }
 `
 
 const Header = () => {
-  const { userInfo, isLogin, isAdmin } = useUser()
+  const { userInfo, isLogin } = useUser()
 
   const email = userInfo?.email
   const name = userInfo?.name
 
   return (
-    <StyledHeader className={classNames({ line: isAdmin })}>
+    <StyledHeader>
       <div className="site-top">
         <div className="layout-width">
           {/* 컨텐츠 영역 */}
           <div className="left">
             <Link href="/">
-              <FaHome />
+              <FaHome className="icon-cls" />
             </Link>
           </div>
           <div className="right">
             {isLogin ? (
               <>
                 {name}({email})님 /
+                <a href="/mypage">
+                  <MdContactPage className="icon-cls" />
+                  마이페이지
+                </a>
                 <a href="/member/api/logout">
-                  <RiLogoutBoxLine />
+                  <RiLogoutBoxLine className="icon-cls" />
                   로그아웃
                 </a>
               </>
             ) : (
               <>
                 <a href="/member/join">
-                  <FaUserPlus /> 회원가입
+                  <FaUserPlus className="icon-cls" /> 회원가입
                 </a>
                 <a href="/member/login">
-                  <RiLoginBoxLine /> 로그인
+                  <RiLoginBoxLine className="icon-cls" /> 로그인
                 </a>
               </>
             )}
@@ -94,14 +88,6 @@ const Header = () => {
         </div>
       </div>
       {/* site-top */}
-      <div className="logo-search">
-        <div className="layout-width">
-          {/* 컨텐츠 영역 */}
-          <Link href="/" className="logo">
-            <Image src={logo} alt="로고" priority={true} height={220} />
-          </Link>
-        </div>
-      </div>
     </StyledHeader>
   )
 }

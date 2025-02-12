@@ -27,7 +27,6 @@ export const buttonColors = {
   info: [colors.info, colors.dark],
   light: [colors.light, colors.dark],
   dark: [colors.dark, colors.white],
-  white: [colors.white, colors.dark],
 }
 
 export default colors

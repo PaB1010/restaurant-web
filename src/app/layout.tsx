@@ -1,6 +1,6 @@
 import StyledComponentsRegistry from './registry'
 import Header from './global/ui/outlines/Header'
-// import Footer from './global/ui/outlines/Footer'
+import Footer from './global/ui/outlines/Footer'
 import { CommonProvider } from './global/contexts/CommonContext'
 import { Metadata } from 'next'
 import { getUserInfo } from './member/services/actions'
@@ -15,8 +15,8 @@ import './globals.css'
 // `
 
 export const metadata: Metadata = {
-  title: 'ADMIN - Pintech Project',
-  description: 'ADMIN - 카드 & 대출 추천 사이트',
+  title: 'Pintech Project',
+  description: '카드 & 대출 추천 사이트',
 }
 
 export default async function RootLayout({
@@ -31,13 +31,11 @@ export default async function RootLayout({
       <body>
         <StyledComponentsRegistry>
           <UserProvider _userInfo={userInfo}>
-            <Header />
-            <main className="main-content">
-              <CommonProvider>
-                {children}
-                {/* <Footer /> */}
-              </CommonProvider>
-            </main>
+            <CommonProvider>
+              <Header />
+              <main className="main-content">{children}</main>
+              <Footer />
+            </CommonProvider>
           </UserProvider>
         </StyledComponentsRegistry>
       </body>

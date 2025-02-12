@@ -1,5 +1,5 @@
 export type CommonType = {
-  children?: React.ReactNode | string[] | string
+  children?: React.ReactNode | string[]
   width?: number | string
   height?: number | string
   color?: string | undefined
@@ -7,5 +7,5 @@ export type CommonType = {
   max?: number
   type?: string | undefined
   disabled?: boolean | undefined
-  placeholder?: string
+  praceholder?: string
 }
