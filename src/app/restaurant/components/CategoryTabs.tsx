@@ -21,7 +21,7 @@ const StyledNav = styled.nav<CommonType>`
     border: 1px solid ${light};
     background: ${info};
     color: ${white};
-    padding: 10px 20px;
+    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
     font-size: ${medium};

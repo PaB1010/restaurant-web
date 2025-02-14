@@ -14,9 +14,15 @@ import './globals.css'
 //   min-height: 600px;
 // `
 
+declare global {
+  interface Window {
+    kakao: any
+  }
+}
+
 export const metadata: Metadata = {
-  title: 'Pintech Project',
-  description: '카드 & 대출 추천 사이트',
+  title: 'Restauruant Service',
+  description: '식당 추천 사이트',
 }
 
 export default async function RootLayout({
@@ -28,6 +34,16 @@ export default async function RootLayout({
 
   return (
     <html lang="ko">
+      <head>
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script
+          type="text/javascript"
+          src={
+            '//dapi.kakao.com/v2/maps/sdk.js?appkey=' +
+            process.env.NEXT_PUBLIC_KAKAO_KEY
+          }
+        ></script>
+      </head>
       <body>
         <StyledComponentsRegistry>
           <UserProvider _userInfo={userInfo}>

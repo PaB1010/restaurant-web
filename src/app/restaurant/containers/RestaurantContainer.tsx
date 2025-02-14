@@ -7,6 +7,7 @@ import KakaoMap from '@/app/global/components/KakaoMap'
 import RestaurantItems from '../components/RestaurantItems'
 import { getList } from '../services/actions'
 import { List } from 'react-content-loader'
+import Messages from '@/app/global/components/Messages'
 
 const Loading = () => <List />
 
@@ -31,12 +32,29 @@ const RestaurantContainer = () => {
   const [items, setItems] = useState<any>([])
   const [loading, setLoading] = useState<boolean>(false)
 
+  const [locations, setLocations] = useState<any>([])
+
+  const [center, setCenter] = useState<any>({})
+
+  const [pan, setPan] = useState<any>({})
+
   useEffect(() => {
     ;(async () => {
       setLoading(true)
       const _items = await getList(search)
       setItems(_items)
-      console.log('items', _items)
+
+      const locations = _items.map(
+        ({ latitude, longitude, name, address, category }) => ({
+          lat: latitude,
+          lon: longitude,
+          name,
+          address,
+          category,
+        }),
+      )
+      setLocations(locations)
+
       setLoading(false)
     })()
   }, [search])
@@ -55,11 +73,17 @@ const RestaurantContainer = () => {
           ...search,
           lat: pos.coords.latitude,
           lon: pos.coords.longitude,
-          limit: limit < 1 ? 50 : limit,
+          limit: limit < 1 ? 5000 : limit,
         }))
+
+        setCenter({ lat: pos.coords.latitude, lon: pos.coords.longitude })
       })
+    } else if (locations && locations.length > 0) {
+      const index = Math.floor(locations.length / 2)
+      const { lat, lon } = locations[index]
+      setCenter({ lat, lon })
     }
-  }, [search])
+  }, [search, locations])
 
   const onChange = useCallback((e) => {
     _setSearch((search) => ({ ...search, [e.target.name]: e.target.value }))
@@ -97,7 +121,9 @@ const RestaurantContainer = () => {
     [_search],
   )
 
-  const onMoveToLocation = useCallback((lat, lon) => {}, [])
+  const onMoveToLocation = useCallback((lat, lon) => {
+    setPan({ lat, lon })
+  }, [])
 
   return (
     <>
@@ -108,11 +134,15 @@ const RestaurantContainer = () => {
         onSubmit={onSubmit}
         onClick={onClick}
       />
-      <KakaoMap />
+      {locations && locations.length > 0 && (
+        <KakaoMap locations={locations} center={center} pan={pan} />
+      )}
       {loading ? (
         <Loading />
-      ) : (
+      ) : items && items.length > 0 ? (
         <RestaurantItems items={items} onClick={onMoveToLocation} />
+      ) : (
+        <Messages color="info">조회된 식당이 없습니다.</Messages>
       )}
     </>
   )
